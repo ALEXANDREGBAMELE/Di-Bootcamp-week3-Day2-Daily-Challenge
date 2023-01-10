@@ -1,23 +1,34 @@
-// In todays exercise we will be creating a Mad Libs game.
-// If you’ve never played this game, a mad lib is a game where you fill in a bunch of blank inputs with different word types (ie : noun, adjective, verb), and then a story is generated based on the words you chose, and sometimes the story is surprisingly funny.
-
-// In this exercise you work with the HTML code presented below.
-
-// Follow these steps :
-
-// Get the value of each of the inputs in the HTML file when the form is submitted. Remember the event.preventDefault()
-// Make sure the values are not empty
-// Write a story that uses each of the values.
-// Make sure you check the console for errors when playing the game.
-// Bonus: Add a “shuffle” button to the HTML file, when clicked the button should change the story currently displayed (but keep the values entered by the user). The user could click the button at least three times and get a new story. Display the stories randomly.
-
-let form = document.forms[0]
-let input = document.querySelectorAll("input")
-let button = document.getElementById("lib-button")
-
-button.addEventListener("click", function(e){
-    e.preventDefault()
-    input.forEach(item =>console.log(item.value))
-    alert("yes")
-})
+let form      = document.querySelector("#libform");
+let noun      = document.querySelector("#noun");
+let adjective = document.querySelector("#adjective");
+let person    = document.querySelector("#person");
+let verb      = document.querySelector("#verb");
+let place     = document.querySelector("#place");
+let button    = document.querySelector("#lib-button");
+let storyArea = document.querySelector("#story");
+let buttonSh  = document.querySelector("#suffle");
+let story     = "";
+let count     = 0;
+button.addEventListener("click",fieldVerification,event)
+buttonSh.addEventListener("click",shuffle,event);
+function isEmpty(field) {
+    return  !!field.value  ? false : true ;
+}
+function fieldVerification(event) {
+    event.preventDefault();
+    if(!isEmpty(noun) && !isEmpty(adjective) && !isEmpty(person) && !isEmpty(verb) && !isEmpty(place)) {
+        storyArea.innerText = generateString();
+    }else{
+        alert("kindly fill all requested field");
+    }
+}
+function generateString() {
+    return story =  `${noun.value} ${adjective.value}  ${person.value} ${verb.value} ${place.value}`;
+}
+function shuffle(event) {
+    event.preventDefault();
+    if(count < 3  )
+        storyArea.innerText  = story.split('').sort(function(){return 0.5-Math.random()}).join(‘’);
+    return count = count + 1 ;
+}
 
