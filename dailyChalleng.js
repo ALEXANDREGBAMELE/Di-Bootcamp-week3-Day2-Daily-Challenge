@@ -15,7 +15,7 @@ function isEmpty(field) {
     return  !!field.value  ? false : true ;
 }
 function fieldVerification(event) {
-    event.preventDefault();
+    event.preventDefault()
     if(!isEmpty(noun) && !isEmpty(adjective) && !isEmpty(person) && !isEmpty(verb) && !isEmpty(place)) {
         storyArea.innerText = generateString();
     }else{
@@ -28,7 +28,7 @@ function generateString() {
 function shuffle(event) {
     event.preventDefault();
     if(count < 3  )
-        storyArea.innerText  = story.split('').sort(function(){return 0.5-Math.random()}).join(‘’);
+        storyArea.innerText  = story.split('').sort(function(){return 0.5-Math.random()}).join('');
     return count = count + 1 ;
 }
 
